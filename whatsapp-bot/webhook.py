@@ -30,7 +30,7 @@ def bot():
         if "help" in result:
             lyric = helpmsg
         else:
-            lyric = """\n © *LYRIC BUTLER* by *Bwanaz*\n IF LYRICS ARE CUT OFF TEXT\n [SONG NAME], [ARTIST], [INDEX] \n Type *HELP* for more info\n\n"""
+            lyric = """\n © *LYRIC BUTLER* by *Bwanaz*\n Text [SONG NAME], [ARTIST], [INDEX] \n Type *HELP* for more info\n\n"""
         msg.body(lyric)
         responded = True
         return str(resp)
