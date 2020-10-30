@@ -20,9 +20,6 @@ def bot():
     resp = MessagingResponse()
     msg = resp.message()
     responded = False
-    print(incoming_msg)
-
-   
     result = incoming_msg.split(",")
   
     song = result[0]
@@ -34,7 +31,6 @@ def bot():
             lyric = helpmsg
         else:
             lyric = """\n © *LYRIC BUTLER* by *Bwanaz*\n IF LYRICS ARE CUT OFF TEXT\n [SONG NAME], [ARTIST], [INDEX] \n Type *HELP* for more info\n\n"""
-        print(lyric)
         msg.body(lyric)
         responded = True
         return str(resp)
@@ -58,7 +54,6 @@ def bot():
         if len(lyric) > 1450:
             lyric = lyric[:1450]
     lyric =  """\n © *LYRIC BUTLER* by *Bwanaz*\n IF LYRICS ARE CUT OFF TEXT\n [SONG NAME], [ARTIST], [INDEX] \n Type Help for more info\n\n""" + "*" + song.title + "*\n" + lyric
-    print(lyric)
     msg.body(lyric)
     responded = True
     
