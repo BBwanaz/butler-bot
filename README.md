@@ -1,3 +1,8 @@
 # lyrics-butler
+Python script to fetch lyrics from GeniusLyrics.
 
-Interfacing WhatsApp and Genius so fans can look up lyrics by sending a text message to our number
+Simply text [Song Name], [Artist Name] and your song will pop up!
+
+ - Twilio for WhatsApp API
+ - String Manipulation
+ - Exception Handling
