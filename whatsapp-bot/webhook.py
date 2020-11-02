@@ -1,70 +1,18 @@
 from flask import Flask, request
 import requests
 from twilio.twiml.messaging_response import MessagingResponse
-import lyricsgenius as lg
-from PyDictionary import PyDictionary
 
 
-mydict = PyDictionary()
-genius = lg.Genius('btUspYNxfEDmb0NA_1Gsxvlste8GxwE52pOFk-7J2hVh_DzCXgLxLzqCZw0R3XIs',  # Client access token from Genius Client API page
-                             skip_non_songs=True, excluded_terms=["(Remix)", "(Live)"],
-                             remove_section_headers=True)
+from apiHelpers import apis
 
-#    song = genius.search_song(song, artist)
+#Declare objects
+
+helper = apis()
+
+
+
 
 app = Flask(__name__)
-#=====================================================================================================================================================
-#                GENIUS API
-#=====================================================================================================================================================
-def getLyrics(req):
-    result = req.split(",") # split the request to get artist and name
-    song = result[0]
-    try:
-        artist = result[1]
-    except IndexError:
-
-        if "help" in result:
-            return helpmsg
-        else:
-            return """\n © *LYRIC BUTLER* by *Bwanaz*\n Text [Lyrics:] [SONG NAME], [ARTIST], [INDEX] \n Type *HELP* for more info\n\n"""
-            
-    song = genius.search_song(song, artist)
-    lyric = song.lyrics
-    
-    if len(result) == 3:
-        index = result[2]
-        if int(index) == 1 and len(lyric) > 1450:
-            lyric = lyric[:1450]
-        elif int(index) == 2 and len(lyric) > 1450*2:
-            lyric = lyric[1450: 1450*2]
-        elif int(index) == 3 and len(lyric) > 1450*3:
-            lyric = lyric[1450*2:1450*3]
-        elif int(index) == 4  and len(1450) > 1450 *4:
-            lyric = lyric[1450*3:1450*4]
-        else:
-            lyric = "Requested lyrics unavailable"
-    else:
-        if len(lyric) > 1450:
-            lyric = lyric[:1450]
-    lyric =  """\n © *LYRIC BUTLER* by *Bwanaz*\n IF LYRICS ARE CUT OFF TEXT\n [SONG NAME], [ARTIST], [INDEX] \n Type Help for more info\n\n""" + "*" + song.title + "*\n" + lyric
-    return lyric
-
-    
-def decode(decoded):
-    # State Machine for decoded message
-    if decoded.lower().strip() == "define":
-        return "dictionary"
-    if decoded.lower().strip() == "lyrics":
-        return "genius"
-
-    
-def dictionary(decoded):
-    # Do nothing
-    mean = mydict.meaning(decoded)        # Remove the curly brackets
-    if mean == None:
-        mean = "Word not found"
-    return mean
-
 
 helpmsg = """\n © *LYRIC BUTLER* by *Bwanaz*\nTo Lookup a song, type its name and artists separated by a comma. \n\nFor example to look up *'ALRIGHT'* by *Kendrick Lamar* type "Alright , Kendrick Lamar"\n \nThe lyrics may be cut off due to capacity issues. \n\nIf your lyrics are cut off, simply type the [SONG NAME] , ARTIST, INDEX. Where index is any number between 2 and 4. \n2 gives you the second fraction of the lyrics and three gives you the third fraction of the lyrics.\n\n For Example the lyrics of *Rap God, Eminem* cut off on the line *"Off a plank and, tell me what.."*. To fetch the next fraction simply type *" Rap God, Eminem, 2"* and the lyrics will continue  """
 
@@ -81,12 +29,14 @@ def bot():
         msg.body(helpmsg)
         return str(resp)
     
-    state = decode(decoded[0])
+    state = apis.decode(decoded[0])
 
     if state == "dictionary":
-        resp_message = dictionary(decoded[1])
+        resp_message = apis.dictionary(decoded[1])
     elif state == "genius":
-        resp_message = getLyrics(decoded[1])
+        resp_message = apis.getLyrics(decoded[1])
+    elif state == "synonym":
+        resp_message = apis.getSynonym(decoded[1])
     else:
         resp_message = helpmsg
   
