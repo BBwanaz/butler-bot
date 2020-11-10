@@ -1,4 +1,4 @@
-# lyrics-butler
+# butler-bot
 Python script to fetch lyrics from GeniusLyrics.
 
 Simply text [Song Name], [Artist Name] and your song will pop up!
