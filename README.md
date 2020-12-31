@@ -11,11 +11,35 @@ Send a text message as follows: Covid: [Country Name]
 for example
 
 ```
-  Covid:  Zimbabwe
+  Covid: Zimbabwe
  ```
+ 
+ ### Definition
 
-Simply text [Song Name], [Artist Name] and your song will pop up!
+Send a text message as follows: Define: [Word]
 
- - Twilio for WhatsApp API
- - String Manipulation
- - Exception Handling
+for example
+
+```
+  Define: Computer
+ ```
+ 
+ ### Synonyms
+
+Send a text message as follows: Synonym: [Word]
+
+for example
+
+```
+  Synonym: machine
+ ```
+ 
+### Song Lyrics
+
+Send a text message as follows: Lyric: [Song Name], [Artist Name]
+
+for example
+
+```
+  Lyric: Faith, Kendrick Lamar
+ ```
