@@ -2,7 +2,7 @@ from PyDictionary import PyDictionary
 import lyricsgenius as lg
 import requests
 
-credit = "\n © BUTLER* by *Bwanaz*\n\n"
+
 covidmsg = """Help stop the spread of COVID 19. Always remember to:\n1. Wash or sanitize your hands frequently\n2  Wear a mask in public places and make sure it covers your mouth and nose\n3. Keep a physical distance of atleast 2m from other people\n\n*Disclaimer*: These tips were derived from the WHO website and we take NO responsibility should they fail to work.
                 """
 
@@ -14,7 +14,7 @@ genius = lg.Genius('btUspYNxfEDmb0NA_1Gsxvlste8GxwE52pOFk-7J2hVh_DzCXgLxLzqCZw0R
                              skip_non_songs=True, excluded_terms=["(Remix)", "(Live)"],
                              remove_section_headers=True)
 class apis:
-    
+    credit = "\n © BUTLER* by *Bwanaz*\n\n"
   #  def __init__(self):
 
 #=====================================================================================================================================================
