@@ -1,8 +1,45 @@
 # Butler by Bwanaz
-WhatsApp Chatbot to fetch lyrics from geniuslyrics, check covid stats in a given city and look up dictionary words meanings
+WhatsApp Chatbot to request covid statistics in a country, look up word definitions or synonyms, and search up song lyrics on genius lyrics. More functionality to come!!
 
-Simply text [Song Name], [Artist Name] and your song will pop up!
+### To Get started, Add +1 (415) 523-8886 and send a whatsapp text message "fifth-of" to this contact. You should get a notification and then you are ready to use the chatbot.
 
- - Twilio for WhatsApp API
- - String Manipulation
- - Exception Handling
+
+### Covid Stats
+
+Send a text message as follows: Covid: [Country Name]
+
+for example
+
+```
+  Covid: Zimbabwe
+ ```
+ 
+ ### Definition
+
+Send a text message as follows: Define: [Word]
+
+for example
+
+```
+  Define: Computer
+ ```
+ 
+ ### Synonyms
+
+Send a text message as follows: Synonym: [Word]
+
+for example
+
+```
+  Synonym: machine
+ ```
+ 
+### Song Lyrics
+
+Send a text message as follows: Lyrics: [Song Name], [Artist Name]
+
+for example
+
+```
+  Lyrics: Faith, Kendrick Lamar
+ ```
