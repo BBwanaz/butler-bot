@@ -32,11 +32,13 @@ def bot():
     state = apis.decode(decoded[0])
 
     if state == "dictionary":
-        resp_message = apis.dictionary(decoded[1])
+        resp_message = apis.dictionary(decoded[1].strip())
     elif state == "genius":
-        resp_message = apis.getLyrics(decoded[1])
+        resp_message = apis.getLyrics(decoded[1].strip())
     elif state == "synonym":
-        resp_message = apis.getSynonym(decoded[1])
+        resp_message = apis.getSynonym(decoded[1].strip())
+    elif state == "covid":
+        resp_message = apis.getCovidStats(decoded[1].strip())
     else:
         resp_message = helpmsg
   

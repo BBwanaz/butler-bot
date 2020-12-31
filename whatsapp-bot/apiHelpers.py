@@ -1,5 +1,11 @@
 from PyDictionary import PyDictionary
 import lyricsgenius as lg
+import requests
+
+credit = "\n © BUTLER* by *Bwanaz*\n\n"
+covidmsg = """Help stop the spread of COVID 19. Always remember to:\n1. Wash or sanitize your hands frequently\n2  Wear a mask in public places and make sure it covers your mouth and nose\n3. Keep a physical distance of atleast 2m from other people\n\n*Disclaimer*: These tips were derived from the WHO website and we take NO responsibility should they fail to work.
+                """
+
 
 
 # Declare objects for our helper modules
@@ -10,6 +16,34 @@ genius = lg.Genius('btUspYNxfEDmb0NA_1Gsxvlste8GxwE52pOFk-7J2hVh_DzCXgLxLzqCZw0R
 class apis:
     
   #  def __init__(self):
+
+#=====================================================================================================================================================
+#                COVID STATS
+#=====================================================================================================================================================
+    def getCovidStats(country):
+        res = ""
+        parameter = {'country' : country}
+        print(country)
+        #response = requests.get("https://coronavirus-tracker-api.herokuapp.com/v2/locations", params = parameter)
+        response = requests.get("https://coronavirus-19-api.herokuapp.com/countries/"+country, params = parameter)
+        
+        print(response.status_code)
+
+        if response.status_code != 200:
+            return credit + "Something Went Wrong. Check country spelling"
+        else:
+            stats = response.json()#['latest']
+            print(stats)
+          #  blurb = "Covid Stats in" + country + "\n"
+          #  for key,value in stats.items():
+          #      res = res + key + " : " + str(value) + "\n"
+            res = res + "*Country* : " + str(stats['country']) + "\n"
+            res = res + "Total Cases : " + str(stats['cases']) + "\n"
+            res = res + "Active : " + str(stats['active']) + "\n"
+            res = res + "Deaths : " + str(stats['deaths']) + "\n"
+            res = res + "Recovered : " + str(stats['recovered']) + "\n\n"
+            res = res + "Today, " + str(stats['todayCases']) + " new cases were discovered  and " + str(stats['todayDeaths']) + " new deaths occured. " + str(stats['critical']) + "People are in critical condition.\n\n" 
+            return credit + res + covidmsg
         
 #=====================================================================================================================================================
 #                GENIUS API
@@ -24,7 +58,7 @@ class apis:
             if "help" in result:
                 return helpmsg
             else:
-                return """\n © *LYRIC BUTLER* by *Bwanaz*\n Text [Lyrics:] [SONG NAME], [ARTIST], [INDEX] \n Type *HELP* for more info\n\n"""
+                return credit + """ Text [Lyrics:] [SONG NAME], [ARTIST], [INDEX] \n Type *HELP* for more info\n\n"""
             
         song = genius.search_song(song, artist)
         if song == None:
@@ -46,7 +80,7 @@ class apis:
         else:
             if len(lyric) > 1450:
                 lyric = lyric[:1450]
-        lyric =  """\n © *LYRIC BUTLER* by *Bwanaz*\n IF LYRICS ARE CUT OFF TEXT\n [SONG NAME], [ARTIST], [INDEX] \n Type Help for more info\n\n""" + "*" + song.title + "*\n" + lyric
+        lyric =  credit + """ IF LYRICS ARE CUT OFF TEXT\n [SONG NAME], [ARTIST], [INDEX] \n Type Help for more info\n\n""" + "*" + song.title + "*\n" + lyric
         return lyric
 #==========================================================================================================================================================================================
 #               DECODING STAGE
@@ -59,6 +93,8 @@ class apis:
             return "genius"
         if decoded.lower().strip() == "synonym":
             return "synonym"
+        if decoded.lower().strip() == "covid":
+            return "covid"
 
 #==================================================================================================================================================================================================
 #   Get Definition
@@ -68,7 +104,7 @@ class apis:
         mean = mydict.meaning(decoded)        # Remove the curly brackets
         if mean == None:
             mean = "Word not found"
-        return mean
+        return credit + mean
 
 #==================================================================================================================================================================================================
 #   Get SYnonym
@@ -79,4 +115,4 @@ class apis:
         syn = mydict.synonym(decoded)        # Remove the curly brackets
         if syn == None:
             syn = "Word not found"
-        return syn
+        return credit + syn
