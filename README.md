@@ -36,10 +36,10 @@ for example
  
 ### Song Lyrics
 
-Send a text message as follows: Lyric: [Song Name], [Artist Name]
+Send a text message as follows: Lyrics: [Song Name], [Artist Name]
 
 for example
 
 ```
-  Lyric: Faith, Kendrick Lamar
+  Lyrics: Faith, Kendrick Lamar
  ```
