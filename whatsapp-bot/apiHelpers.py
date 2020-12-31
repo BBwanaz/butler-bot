@@ -100,11 +100,21 @@ class apis:
 #   Get Definition
 #==================================================================================================================================================================================================
     def dictionary(decoded):
+        result = ""
     # Do nothing
         mean = mydict.meaning(decoded)        # Remove the curly brackets
+        print(mean)
+
         if mean == None:
-            mean = "Word not found"
-        return credit + mean
+            return credit + "Word not found"
+
+        for key, value in mean.items():
+            result = result + "*" + key + "*" + ": \n\n"
+            for i in value:
+                result = result + " - " +  i + "\n\n"
+            
+
+        return credit + result
 
 #==================================================================================================================================================================================================
 #   Get SYnonym
@@ -112,7 +122,15 @@ class apis:
 
 
     def getSynonym(decoded):
+        result = ""
         syn = mydict.synonym(decoded)        # Remove the curly brackets
         if syn == None:
-            syn = "Word not found"
-        return credit + syn
+             return credit + "Word not found"
+
+        result = "*Synonyms*: \n"
+        for i in syn:
+            result = result + " - " +  i + "\n"
+            
+
+        return credit + result
+            
